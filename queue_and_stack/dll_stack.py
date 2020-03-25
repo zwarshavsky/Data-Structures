@@ -16,8 +16,10 @@ class Stack:
         print(f"added {self.storage.tail.value} to the stack's tail")
 
     def pop(self):
-        print(self.storage.remove_from_tail(),"removed")
+        if self.storage.head is None:
+            return None
         self.size -= 1 
+        return self.storage.remove_from_tail()
 
     def len(self):
         return self.size

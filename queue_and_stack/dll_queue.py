@@ -15,8 +15,10 @@ class Queue:
         print(f"added {self.storage.tail.value} to queue's tail")
 
     def dequeue(self):
-        print(self.storage.remove_from_head(),"removed")
+        if self.storage.head is None:
+            return None
         self.size -= 1 
+        return self.storage.remove_from_head()
         
 
     def len(self):
@@ -27,10 +29,11 @@ if __name__ == "__main__":
     # ld.insert_after(98)
     # ld.insert_before(86)
     q1 = Queue()
-    q1.enqueue(56)
-    q1.enqueue(74)
-    print(q1.len())
-    print(q1.storage.head.value)
+    q1.enqueue(100)
+    q1.enqueue(101)
+    q1.enqueue(105)
+    # print(q1.len())
+    # print(q1.storage.head.value)
     q1.dequeue()
-    print(q1.len())
-    print(q1.storage.head.value)
+    # print(q1.len())
+    print(q1.storage.head)
