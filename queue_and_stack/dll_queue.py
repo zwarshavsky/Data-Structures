@@ -12,7 +12,7 @@ class Queue:
     def enqueue(self, value):
         self.storage.add_to_tail(value)
         self.size += 1 
-        print(f"added {self.storage.tail.value} to queue's tail")
+        # print(f"added {self.storage.tail.value} to queue's tail")
 
     def dequeue(self):
         if self.storage.head is None:

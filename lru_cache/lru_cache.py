@@ -15,7 +15,6 @@ class LRUCache:
         self.cache_dict = {}
 
 
-
 # limit = 3
 
 # 1. add 3 items to master / cache
@@ -55,20 +54,22 @@ class LRUCache:
     """
     def get(self, key):  
 
+
+# node = self.storage.head  # 
+# while node:  # Loop through nodes
+#     ...
+#     node = node.next  # Iterate
+
         if key in self.cache_dict.keys():
-            while self.cache.head.next != None:
-                print(f"removing node with key {key} and placing in head")
-                if self.cache.head.value == key:
-                    self.cache.head.next.delete()
-                    self.cache.add_to_head(key)
+            node = self.cache.head
+            while node:
+                if node.value == key:
+                    print("found!")
+                    self.cache.move_to_front(node)
+                    break
+                else:
+                    node = node.next
             return self.cache_dict[key]
-        # else:
-        #     while self.cache.head.next:
-        #         print(f"removing node with key {key} and placing in head")
-        #         if self.cache.head.value == key:
-        #             self.cache.head.next.delete()
-        #             self.cache.add_to_head(key)
-        #     return self.cache_dict[key] 
 
     """
     Adds the given key-value pair to the cache. The newly-
@@ -87,12 +88,15 @@ class LRUCache:
             self.current_number_nodes += 1 
 
         elif self.current_number_nodes > 0 and self.current_number_nodes < self.limit:
-            if key in self.cache_dict.items():
+            if key in self.cache_dict.keys():
                 self.cache_dict[key] = value
-                while self.cache.head.next:
-                    if self.cache.head.value == key:
-                        self.cache.head.next.delete()
-                        self.cache.add_to_head(key)
+                while node:
+                    if node.value == key:
+                        print("found!")
+                        self.cache.move_to_front(node)
+                        break
+                    else:
+                        node = node.next
             else:
                 # self.storage.add_to_head({key,value})
                 self.cache.add_to_head(key)
@@ -103,12 +107,16 @@ class LRUCache:
             #only scenario where the item would not be in cache, but would be present in
             #master is where the cache reached max capacity and the item was previously removed
         
-            if key in self.cache_dict.items():
+            if key in self.cache_dict.keys():
                 self.cache_dict[key] = value
-                while self.cache.head.next:
-                    if self.cache.head.value == key:
-                        self.cache.head.next.delete()
-                        self.cache.add_to_head(key)
+                node = self.cache.head
+                while node:
+                    if node.value == key:
+                        print("found!")
+                        self.cache.move_to_front(node)
+                        break
+                    else:
+                        node = node.next
             else:
                 temp_key = self.cache.remove_from_tail()
                 del self.cache_dict[temp_key]
@@ -119,17 +127,10 @@ class LRUCache:
 
 if __name__ == "__main__":
     l = LRUCache(3)
-    l.set(1,"a")
-    l.set(2,"b")
-    l.set(3,"c")
-    l.set(4,"d")
-    l.set(1,"z")
-    print(l.cache_dict)
+    l.set('item1', 'a')
+    l.set('item2', 'b')
+    l.set('item3', 'c')
+    l.set('item2','z')
     print(l.cache.head.value)
-    print(l.get(4))
-    print(l.cache_dict)
-    print(l.cache.head.value)
-    # l.cache.head.value[1])
-    # l.set(1,"a")
-    # l.set(2,"b")
-    # l.set(3,"c")
+    print(l.get('item2'))
+    # print(l.cache_dict)

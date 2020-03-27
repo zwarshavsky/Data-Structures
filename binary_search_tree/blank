@@ -1,0 +1,6 @@
+left if left node exists
+///// traverse all nodes left of root node
+
+right if right node exists
+///// traverse all nodes left of root node
+

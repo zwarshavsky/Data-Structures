@@ -13,7 +13,7 @@ class Stack:
         #list it is an identical process
         self.storage.add_to_tail(value)
         self.size += 1 
-        print(f"added {self.storage.tail.value} to the stack's tail")
+        # print(f"added {self.storage.tail.value} to the stack's tail")
 
     def pop(self):
         if self.storage.head is None:
